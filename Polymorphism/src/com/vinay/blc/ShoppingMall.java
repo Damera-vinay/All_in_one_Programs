@@ -12,63 +12,50 @@ public class ShoppingMall {
 		System.out.println("choose one :");
 		Scanner sc =new Scanner(System.in);
 		Customer c;
+		
 		int choice = Integer.parseInt(sc.nextLine());
+		System.out.println("Enter custmor name");
+		String name = sc.nextLine();
+		
+		System.out.println("Enter no of Items");
+		int items = Integer.parseInt(sc.nextLine());
+		
+		double itemPrice[] = new double[items];
+		for(int i=0;i<items;i++) {
+			System.out.println((i + 1) + ") Item Name :");
+			String itemname=sc.nextLine();
+			System.out.println("   Item Price :");
+			
+			itemPrice[i] = Double.parseDouble(sc.nextLine());
+		}
 		switch(choice){
 		case 1 ->{
-			System.out.println("Enter custmor name");
-			String name = sc.nextLine();
+			
+			
 			
 			c=new GeneralCustomer(name);
 			
-			System.out.println("Enter no of Items");
-			int items = Integer.parseInt(sc.nextLine());
-			double itemPrice[] = new double[items];
-		    for(int i=0;i<items;i++) {
-		    	System.out.println((i + 1) + ") Item Name :");
-                sc.nextLine(); 
-                System.out.println("   Item Price :");
-                itemPrice[i] = Double.parseDouble(sc.nextLine());
                    
-		   }
 		    c.calculateBill(itemPrice);
 		    c.printDetails();
 		}
+		
+		
 		case 2 ->{
 			
-			System.out.println("Ënter name ");
-			String name = sc.nextLine();
+			
+			
 			
 			c = new PrimeCustomer(name);
-			
-			System.out.println("Enter no of Items");
-			int items = Integer.parseInt(sc.nextLine());
-			double itemPrice[] = new double[items];
-		    for(int i=0;i<items;i++) {
-		    	System.out.println((i + 1) + ") Item Name :");
-                sc.nextLine();
-                System.out.println("   Item Price :");
-                itemPrice[i] = Double.parseDouble(sc.nextLine());
-            }
             c.calculateBill(itemPrice);
             c.printDetails();
         }
+		
+		
 		case 3 ->{
-			 System.out.println("Enter customer name");
-	            String name = sc.nextLine();
+			
 
 	            c = new VIPCustomer(name);
-	            System.out.println("Enter no of Items");
-	            int items = Integer.parseInt(sc.nextLine());
-
-	            double itemPrice[] = new double[items];
-
-	            for (int i = 0; i < items; i++) {
-	                System.out.println((i + 1) + ") Item Name :");
-	                sc.nextLine();
-	                System.out.println("   Item Price :");
-	                itemPrice[i] = Double.parseDouble(sc.nextLine());
-	            }
-
 	            c.calculateBill(itemPrice);
 	            c.printDetails();
 		    				
