@@ -1,0 +1,82 @@
+package com.nit.Arrays;
+public class EducationInstitute{
+	
+	public static void main(String [] args) {
+		Course[] courses= {
+			new Course(1 , "Java" , 35000.0),	
+			new Course(2 , ".Net" , 30000.0),	
+			new Course(3 , "Python" ,32000.0)	
+		};
+		
+		Offer[] offers= {
+			new Offer("Special discount: Get 20% off on all courses!"),
+			new Offer("Limited time offer: Enroll in any two courses and get one course free!")	
+		};
+		EducationInstitutes institute = new EducationInstitutes(courses, offers);
+		
+		String name = IO.readln("Enter student name :"); 
+		Student stu = new Student(name,institute);
+		stu.viewCoursesAndFees();
+		stu.viewOffers();
+		int id=Integer.parseInt(IO.readln("Enter course id to enrole :"));
+		stu.enrollInCourse(id);
+		
+		
+		
+	}
+	
+//	COurce record
+	record Course(Integer id,String name,Double fee) {
+		
+	}
+	
+	record Offer(String  OfferText) {
+	}
+	
+// EducationInstitutes record
+	
+	record EducationInstitutes(Course[] cources , Offer[] offers) {
+	  public void enrollStudentInCourse(int courseId, String studentName) {	
+		  boolean found = false;
+		  for(Course c : cources) {
+			  if(c.id == courseId) {
+				  IO.println(studentName+" enrolled in :"+c.name());
+				  found=true;
+				  break;
+			  }
+		  }
+		  if(!found) {
+			  IO.println("Course with ID "+courseId+" not found.");
+		  }
+		  
+	  }
+	}
+//#student record
+	record Student(String name,EducationInstitutes institute) {
+		
+	
+	public void viewCoursesAndFees() {
+		for(Course cr:institute.cources()) {
+		System.out.println(cr.id()+":"+cr.name()+":"+cr.fee());
+		}
+		
+	}
+	public void viewOffers() {
+		for(Offer of : institute.offers()) {
+			IO.println(of.OfferText());
+		}
+	
+		
+	}
+	public void enrollInCourse(Integer courseId){
+		institute.enrollStudentInCourse(courseId, name);
+		}		
+		}
+		
+		
+	}
+
+
+
+
+
