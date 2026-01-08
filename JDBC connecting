@@ -1,0 +1,30 @@
+package com.pack1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class JdbcPro1 
+{
+	String driver = "oracle.jdbc.OracleDriver";
+	String dbUrl = "jdbc:oracle:thin:@localhost:1521:orcl";
+	String dbUname = "DAMERA";
+	String dbpwd = "ENJOY";
+	
+   void connect() {
+	   System.out.println("Connecting to the data base");
+	   try {
+		   Class.forName(driver);
+		   Connection con =DriverManager.getConnection(dbUrl, dbUname, dbpwd);
+		   System.out.println("Connected created");
+		   con.close();
+		   
+	   }
+	   catch(Exception e) {
+		   e.printStackTrace();
+	   }
+   }
+   public static void main(String [] args) {
+	   JdbcPro1 obj = new JdbcPro1();
+	   obj.connect();
+   }
+}
