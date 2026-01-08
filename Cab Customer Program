@@ -1,0 +1,106 @@
+package com.nit.Library;
+
+import java.util.ArrayList;
+
+record Customer(int custId,
+        String customerName,
+        String pickupLocation,
+        String dropLocation,
+        int distance,
+        String phone) {
+	
+	public Customer{
+		
+		if(custId<0) {
+		throw new IllegalArgumentException("Validation Error: Customer ID must be positive.");
+		}
+		if(customerName.isEmpty() || customerName.isBlank()) {
+		throw new IllegalArgumentException("Validation Error: Customer name cannot be null or blank.");
+			
+		}
+		if(pickupLocation.isEmpty() || pickupLocation.isBlank() || pickupLocation.equals(null)) {
+	    throw new IllegalArgumentException("Validation Error: Pickup location cannot be null or blank.");
+		}
+		if(dropLocation.isBlank() || dropLocation.isEmpty() || dropLocation.equals(null)) {
+		throw new IllegalArgumentException("Validation Error: Drop location cannot be null or blank.");
+		}
+		if(distance<0) {
+		throw new IllegalArgumentException("Validation Error: Distance cannot be negative.");
+		}
+		if(phone.length()!= 10) {
+		throw new  IllegalArgumentException("Validation Error: Phone number must be 10 digits only.");
+		}
+		
+		
+    }
+ 	  
+}
+
+class CustomerService{
+
+	private ArrayList<Customer> customers;
+
+	public CustomerService() {
+		
+		this.customers = new ArrayList<Customer>();
+	}
+	
+	public void addCustomer(Customer customer){
+		customers.add(customer);
+		
+	}
+	private boolean isFirstCustomer(Customer customer) {
+		boolean isFirst = false;
+		
+		for(Customer c : customers) {
+			if(c.phone()!=customer.phone()) {
+				isFirst=true;
+			}
+			
+		}
+		if(isFirst== false) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	
+	}
+	public double calculateBill(Customer customer) {
+		if(isFirstCustomer(customer)) {
+			return 0.0;
+		}
+		else if(customer.distance()<=4) {
+			return 80.0;
+		}
+		else {
+			return 80 + 2 * 6;
+		}
+		
+	}
+	public String  PrintBill(Customer customer) {
+		return ""+ customer.customerName()+" Please pay your bill of "+this.calculateBill(customer)+"";
+	}
+	
+}
+public class CabCustomerServiceTester {
+	void main() {
+		Customer c=null;
+		CustomerService c1=null;
+		for(int i=1;i<3;i++) {
+		int id = Integer.parseInt(IO.readln("Enter the id :"));
+		
+		String cname= IO.readln("Enter customer Name :");
+		String pol= IO.readln("Enter pick location :");
+		String dol= IO.readln("Enter drop loacation :");
+		int dis = Integer.parseInt(IO.readln("Enter the distance :"));
+		String phn = IO.readln("Enter customer phone NUmber :");
+		
+		 c = new Customer(id, cname, pol, dol, dis, phn);
+		 c1 =new CustomerService();
+		 c1.calculateBill(c);
+		c1.addCustomer(c);
+		}
+		IO.println(c1.PrintBill(c));
+	}
+}
