@@ -1,0 +1,38 @@
+package com.nit.HandlingPrograms;
+
+
+public class ChildClass extends ParentClass {
+	
+   @Override
+	public void loadingClass(String str) throws ClassNotFoundException {
+	   super.loadingClass(str);
+		
+	}
+}
+
+package com.nit.HandlingPrograms;
+
+import java.util.Scanner;
+
+public class HandlingDemo1 {
+	public HandlingDemo1(String string){
+		
+//		Class <?> forname = Class.forName(string);
+		if(string.isEmpty()||string.isBlank()) {
+			throw new IllegalArgumentException("i am not valid");
+		}
+		System.out.println("succefull");
+		
+	}
+         
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		IO.println("start");
+		String str ="";
+		HandlingDemo1 demo=null;
+			demo = new HandlingDemo1(str);
+		
+		IO.println(demo);
+	}
+}
+
