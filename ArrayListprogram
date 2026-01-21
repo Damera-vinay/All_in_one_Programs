@@ -1,0 +1,75 @@
+package com.nit.arrayList;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class StoreObject {	
+		public static void main(String[] args) {
+			ArrayList<Student> list =  new ArrayList<>();
+			Scanner sc = new Scanner(System.in);
+			
+			String choice = null;
+			do {
+				Student s = Student.getStudentObject();
+				list.add(s);
+				IO.print("Do you want to add more students? (yes/no):");
+				choice = sc.next();
+				
+			}while(choice.equalsIgnoreCase("yes"));
+			
+			try {
+				ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Student.txt"));
+				oos.writeObject(list);
+				oos.close();
+				IO.println("Student data Storeed Succesgully");
+				
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}	
+	}
+
+}
+
+
+
+
+package com.nit.arrayList;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+class Student implements Serializable
+{
+	private static final long serialVersionUID = 1L;	
+	private Integer studentId;
+	private String studentName;
+	private Double studentFee;
+	private LocalDate dateOfAdmissions;
+	private String studentNmae;
+	public Student(Integer studentId, String studentNmae, Double studentFee, LocalDate dateOfAdmissions) {
+		super();
+		this.studentId = studentId;
+		this.studentNmae = studentNmae;
+		this.studentFee = studentFee;
+		this.dateOfAdmissions = dateOfAdmissions;
+	}
+	public static Student getStudentObject() {
+//		Scanner sc = new Scanner(System.in);
+		Integer id =Integer.parseInt(IO.readln("Enter Student Id :"));
+		String name = IO.readln("Enter Student name :");
+		Double fee = Double.parseDouble(IO.readln("Enter Student FEE :"));
+		LocalDate date = LocalDate.parse(IO.readln("Enter Admission Date (yyyy-mm-dd): "));
+		
+		return new Student(id, name, fee, date);
+	}
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", studentName=" + studentName + ", studentFee=" + studentFee
+				+ ", dateOfAdmissions=" + dateOfAdmissions + ", studentNmae=" + studentNmae + "]";
+	}
+}
+
+
+
