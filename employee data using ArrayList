@@ -1,0 +1,106 @@
+package com.nit.arrayList;
+
+public class Employee {
+	private String Name;
+	private String Position;
+	private Double salary;
+	public Employee(String name, String position, Double salary) {
+		super();
+		this.Name = name;
+		this.Position = position;
+		this.salary = salary;
+	}
+	public String getName() {
+		return Name;
+	}
+	public void setName(String name) {
+		this.Name = name;
+	}
+	public String getPosition() {
+		return Position;
+	}
+	public void setPosition(String position) {
+		this.Position = position;
+	}
+	public Double getSalary() {
+		return salary;
+	}
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+	@Override
+	public String toString() {
+		return "Directory [Name=" + Name + ", Position=" + Position + ", salary=" + salary + "]";
+	}
+}
+
+package com.nit.arrayList;
+
+import java.util.ArrayList;
+
+public class DirectoryClass {
+ArrayList<Employee> employee = new ArrayList<>();
+
+
+   public void addEmployee(Employee e) {
+	   
+	   employee.add(e);
+	   IO.println("Employee data added succesfully");
+	   
+	 
+   }
+   public void displayAllEmployees() {
+	   for(Employee emp : employee) 
+	   {
+		   IO.println(employee);
+		   
+	   }
+   }
+   public void updateEmployee(int index , String Position) {
+	   if(index >0) {
+		   Employee employees = employee.get(index);
+		   employees.setPosition(Position);
+		   
+		   employee.set(index, employees); 
+	   }
+	   else {
+		   IO.println("Not found");
+	   }
+   }
+   public void deleteEmployee(int index) {
+	   if(index >=0 && index <employee.size()) {
+		   employee.remove(index);
+		   IO.println("Data deleted suceccfully ");
+	   }else {
+		   IO.println("Invalid Data");
+	   }
+	   
+   }	
+}
+
+package com.nit.arrayList;
+
+public class EmployeeDirectoryExample {
+
+	public static void main(String[] args) {
+		
+		
+		
+		Employee empl1 = new Employee("vinay", "devaloper", 50000.0);
+		Employee empl2 = new Employee("jevvan", "L1 dev", 50000.0);
+		
+		DirectoryClass directoryClass = new DirectoryClass();
+		directoryClass.addEmployee(empl1);
+		directoryClass.addEmployee(empl2);
+		
+		directoryClass.updateEmployee(0, "Manager");
+		directoryClass.displayAllEmployees();
+		
+		directoryClass.deleteEmployee(0);
+		directoryClass.displayAllEmployees();
+	}
+		}
+
+
+
+
