@@ -1,0 +1,66 @@
+package com.nit.Hashmap;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.util.List;
+import java.util.Map;
+
+public class RegistrationSystem {
+    void main() {
+    	HashMap<String, List<String>> list = new HashMap<>();
+    	
+    	while(true) {
+    	IO.println("--- Course Registration Menu ---");
+    	IO.println("1. Register student to course.");
+    	IO.println("2. View course-wise student list.");
+    	IO.println("3. Remove student from course.");
+    	IO.println("4. Exit.");
+    	
+    	int choice = Integer.parseInt(IO.readln("Enter your choice: "));
+    	
+    	switch(choice) {
+    	case 1:
+    		String  cource = IO.readln("Enter Cource name: ");
+    		
+    		String  name = IO.readln("Enter student name: ");
+    		
+    		
+			list.computeIfAbsent(cource, K-> new ArrayList<>()).add(name);
+			IO.println(name+" registered to "+cource);
+			break;
+			
+    	case 2:
+    		for(Map.Entry<String, List<String>> l:list.entrySet()) {
+    			IO.println(l.getKey()+" "+l.getValue());
+    		}
+    		
+    		
+    		break;
+    		
+    	case 3:
+    		String  cource3 = IO.readln("Enter Cource name: ");
+    		
+    		String  name3 = IO.readln("Enter student name to remove: ");
+    		
+    		list.computeIfPresent(cource3, (k,v)->{
+    			v.remove(name3);
+    			return list.isEmpty()?null:v;
+    		});
+    		
+    		IO.println(name3+" : has removed from "+cource3);
+    		
+    		
+    		break;
+    		
+    	case 4:
+    		
+    		System.exit(0);
+    	break;
+    	}
+    	
+    	
+    	
+    	}
+    }
+}
