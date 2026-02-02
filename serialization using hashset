@@ -1,0 +1,37 @@
+package com.nit.Serialization;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashSet;
+
+public class SerializationDemo {
+	
+	public static void main(String[] args) {
+		try {
+		HashSet<String> set = new HashSet<>();
+		set.add("java");
+		set.add("python");
+		set.add("c lang");
+		
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("hashset.ser"));
+		
+		oos.writeObject(set);
+		oos.close();
+		System.out.println("HashSet serialized successfully");
+		
+		
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("hashset.ser"));
+		HashSet<String> resset = (HashSet<String>) ois.readObject();
+		
+		ois.close();
+		System.out.println("Restored HashSet: "+resset);
+		}
+		catch (Exception e) {
+	        e.printStackTrace();
+			// TODO: handle exception
+		}
+	}
+
+}
