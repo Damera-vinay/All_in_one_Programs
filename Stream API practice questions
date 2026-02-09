@@ -1,0 +1,147 @@
+1. Given a list of Person objects with name and age properties, write a program to sort the list of persons by age in ascending order using the Stream API.
+-----------------------------------------------------------------------
+package com.nit.Streampro;
+
+
+	import java.util.ArrayList;
+	import java.util.Comparator;
+	import java.util.List;
+
+	public class SortedPersonAge {
+		
+		public static void main(String[] args)
+
+		{
+			
+			List<Person> per = new ArrayList<>();
+			per.add(new Person("Scott",28));
+			per.add(new Person("Alice",39));
+			per.add(new Person("raj",20));
+			per.add(new Person("tavi",25));
+			
+			List<Person> Ascending= per.stream()
+					.sorted(Comparator.comparingInt(Person::getAge)).toList();
+			System.out.println("Ascending order is :"+Ascending);
+			
+		}
+		
+	}
+	class Person{
+		private String name;
+		private int age;
+		public Person(String name, int age) {
+			super();
+			this.name = name;
+			this.age = age;
+		}
+		public String getName() {
+			return name;
+		}
+		
+		public int getAge() {
+			return age;
+		}
+		@Override
+		public String toString() {
+			return "Person [name=" + name + ", age=" + age + "]";
+		}
+		
+		
+	}
+
+
+
+
+
+=======================================================================================
+
+2. Write a program to convert all the strings in a list to uppercase and print the result using the Stream API.
+-----------------------------------------------------------------------
+Ans:
+
+package com.nit.Streampro;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListUppercase {
+	public static void main(String[] args) {
+		List<String> name = new ArrayList<>();
+    	name.add("student");
+		name.add("marks");
+		name.add("cources");
+		
+		List<String> res = name.stream()
+				.map(String::toUpperCase).toList();
+		res.forEach(IO::println);
+		
+	}
+
+}
+=======================================================================================
+3. Given a list of Employee objects with id and salary properties, write a program to sort the list of Employees by salary in descending order using the Stream API.
+----------------------------------------------------------------------
+Ans:
+package com.nit.Streampro;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+record Employee(int id,String name,double salary) {
+	
+}
+public class EmployeeData {
+	public static void main(String[] args) {
+		List<Employee> emp = new ArrayList<>();
+		emp.add(new Employee(101, "Scott", 5000D));
+		emp.add(new Employee(101, "Rehan", 4500D));
+		emp.add(new Employee(101, "jeevan", 8000D));
+		emp.add(new Employee(101, "Alice", 2000D));
+		
+	     List<Employee> res=emp.stream()	  	               .sorted(Comparator.comparingDouble(Employee::salary))
+	    		                      .toList();    
+	     res.forEach(IO::println);
+		
+	}
+
+}
+
+
+4. Write a program to convert all the strings in a list to lowercase and print the result using the Stream API.
+-----------------------------------------------------------------------
+package com.nit.Streampro;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class StringToListConvertion {
+	public static void main(String[] args) {
+		
+	
+	String str = "VINAY,REHAN,JEEVAN,SRITAM";
+	
+	List< String> con = new ArrayList<>(Arrays.asList(str.split(",")));
+	                    List<String>  res = con.stream()
+	                    		              .map(String::toLowerCase)
+                      		              .toList();
+	      res.forEach(IO::println);          
+	}
+
+}
+
+
+================================================================================
+5. Given a list of Employee objects with id and salary properties, write a program to filter the list of Employees by salary in who are having salary > 30000.
+-------------------------------------------------------------------------
+Ans:
+
+
+=========================================================================
+6. Write a program to convert all the lower case strings in a list to first letter Uppercase and print the result using the Stream API.
+
+ex -> input -> "abcd" , "efgh" , "jklm" , "xyz" -----> output -> Abcd , Efgh , Jklm , Xyz
+
+
